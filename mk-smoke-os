@@ -1,0 +1,182 @@
+#!/bin/bash
+# ---------------------------------------
+# Define Functions:
+# ---------------------------------------
+#
+#
+CP_SMOKE () {
+clear
+echo " "
+cp -r smokeOS /usr/share/
+cp /usr/share/smokeOS/mk-smoke-os /usr/local/bin/
+cp /usr/share/smokeOS/backgrounds/* /usr/share/images/desktop-base/
+cp /usr/share/smokeOS/backgrounds/* /usr/share/wallpapers/
+
+clear
+echo " "
+echo "Copied smokeOS folder to /usr/share/"
+sleep 5
+clear
+}
+#
+#
+OPTSRC () { 
+clear
+echo " "
+cp /usr/share/smokeOS/sources/sources.buster /etc/apt/sources.list
+cp /usr/share/smokeOS/sources/smoke.list /etc/apt/smoke.list
+clear
+echo " "
+echo "Optimized sources.list"
+sleep 5
+clear
+echo " "
+apt-get -y update
+apt-get -y dist-upgrade
+clear
+echo " "
+echo "Ran dist-upgrade"
+sleep 5
+clear
+}
+#
+#
+INST_PKGS () { 
+clear
+echo " "
+apt-get install -y terminator htop tar nano gnome-tweaks git gparted mjpegtools x265 x264 mpg321 ffmpeg vlc gnome-system-tools ssh syslinux syslinux-common isolinux live-build fakeroot linux-headers-amd64 lsb-release software-properties-common menu build-essential dkms curl wget iftop apt-transport-https dirmngr nvidia-detect openvpn network-manager-openvpn openvpn-systemd-resolved firmware-linux
+apt-get install -y httpie siege nmap netcat
+#apt-get install -y fd-find rust-fd-find
+bash /usr/share/smokeOS/scripts/install-nodejs
+bash /usr/share/smokeOS/scripts/install-docker
+bash /usr/share/smokeOS/scripts/install-others
+clear
+echo " "
+echo "Additional software installed"
+sleep 5
+clear
+}
+#
+#
+MMEDIA () {
+clear
+echo " "
+cp /usr/share/smokeOS/sources/deb-multimedia.list /etc/apt/sources.list.d/deb-multimedia.list
+dpkg -i /usr/share/smokeOS/mmedia/deb-multimedia-keyring_2016.8.1_all.deb
+apt-get -y update
+clear
+echo "Added deb-multimedia.org repos"
+sleep 5
+clear
+}
+#
+#
+UPGDMO () {
+clear
+echo " "
+apt-get -y update
+apt-get -y dist-upgrade
+clear
+echo "Distribution fully upgraded"
+sleep 5
+clear
+}
+#
+#
+CLEAN_GARBAGE () {
+clear
+echo " "
+apt-get purge gnome-games gbrainy -y && sudo apt-get autoremove -y
+clear
+echo "Garbage apps removed"
+sleep 5
+clear
+}
+#
+#
+RESOLVED () {
+clear
+echo " "
+systemctl enable systemd-resolved.service
+systemctl start systemd-resolved.service
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+clear
+echo " "
+echo "Enabled systemd-resolved service"
+sleep 5
+clear
+}
+#
+#
+TESTING () {
+clear
+echo " "
+cp /usr/share/smokeOS/sources/sources.testing /etc/apt/sources.list
+clear
+echo " "
+echo "Changing sources.list to Testing"
+sleep 5
+clear
+echo " "
+apt-get -y update
+apt-get -y dist-upgrade
+clear
+echo " "
+echo "Ran dist-upgrade"
+sleep 5
+clear
+}
+#
+#
+# function_name () { ; }
+#
+#
+# ---------------------------
+# Main Menu
+# ---------------------------
+#
+mainmenu () { while true
+do
+clear
+echo "-------------------"
+echo " Make smokeOS:"
+echo "-------------------"
+echo
+echo " (a) Copy smokeOS support files "
+echo " (b) Optimize sources.list "
+echo "     -- Reboot Now -- "
+echo " (c) Install additional software "
+echo "     -- Reboot Now -- "
+echo " (d) Add deb-multimedia.org (only if needed) "
+echo " (e) Run multimedia dist-upgrade (optional) "
+echo " (f) full install "
+echo " (g) Enable Systemd-Resolved DNS Cache "
+echo " "
+echo " (h) Clean garbage softwares "
+echo " "
+echo " "
+echo " (x) Exit "
+echo
+read -p "Please enter your choice: " choice
+case $choice in
+  a|A) CP_SMOKE;;
+  b|B) OPTSRC;;
+  c|C) INST_PKGS;;
+  d|D) MMEDIA;;
+  e|E) UPGDMO;;
+  f|F) CP_SMOKE && OPTSRC && INST_PKGS && MMEDIA && UPGDMO && CLEAN_GARBAGE;;
+  g|G) RESOLVED;;
+  h|H) CLEAN_GARBAGE;;
+  x|X) exit;;
+  *) echo "Invalid Answer, Please Try Again";;
+#
+esac
+done
+}
+#
+# Begin main program:
+#
+mainmenu
+#
+done
+#

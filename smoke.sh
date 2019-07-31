@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 #==================================== Imports ===============================================
 # Import ui
 . ui/import.sh
@@ -22,7 +28,8 @@
 
 # Presentation function and options
 welcome(){
-    ui-start.sh
+    setup.sh;
+    ui-start.sh;
 }
 
-welcome
+welcome;

@@ -6,14 +6,11 @@ ui-main.sh(){
     border=white,red
     textbox=white,red
     button=black,white
-    '
-	clear ;
-    # whiptail --title "FileFind" --msgbox "This is our ACME-FINDAPP You must hit OK to continue." 8 78
-    # ui-select-server.sh
-    # ui-select-desktop.sh
+    ';
+	clear;
 
     function ui-main(){
-        menu_title="Server Applications";
+        menu_title="Smart Install";
         menu_msg="Select applications to install";
         menu_window="25 78 16";
 
@@ -23,20 +20,17 @@ ui-main.sh(){
             "ui-select-desktop.sh" "Install Desktop packages" \
         );
 
-        echo $menu_list
-
-
-        selected=$(whiptail --title "$menu_title" --fb --menu "$menu_msg" $menu_window "${menu_list[@]}" --cancel-button "Exit" --notags 3>&1 1>&2 2>&3)
-        selected_apps="${selected//\"}"
+        selected=$(whiptail --title "$menu_title" --fb --menu "$menu_msg" $menu_window "${menu_list[@]}" --cancel-button "Exit" --notags 3>&1 1>&2 2>&3);
+        selected_apps="${selected//\"}";
 
         status=$?;
         selected=($selected);
                 
         if [ $status = 0 ] && [ ${#selected[@]} -ge 1 ];
         then
-            $selected
+            $selected;
         else
-            echo "Good bye"
+            echo "Good bye";
         fi
     }
 

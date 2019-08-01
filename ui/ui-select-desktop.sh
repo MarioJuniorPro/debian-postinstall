@@ -12,7 +12,6 @@ ui-select-desktop.sh(){
             then
                 file_list="$file_list$file "${file/.sh/}" off "
             fi
-
         done;
 
         checkbox_title="Desktop Applications"
@@ -40,6 +39,8 @@ ui-select-desktop.sh(){
             for val in $selected_apps; do
                 $val;
             done
+            msg-success.sh "Installation was successful";
+            ui-main.sh;
         else
             showAppSelect
         fi

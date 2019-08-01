@@ -6,9 +6,6 @@
 # Import SublimeText
 . desktop/sublimetext.sh
 
-# Import Brackets
-. desktop/brackets.sh
-
 # Import Brave
 . desktop/brave.sh
 
@@ -25,7 +22,7 @@
 . desktop/composer.sh
 
 #Import Terminator
-. desktop/termiantor.sh
+. desktop/terminator.sh
 
 # Import VS Code
 . desktop/vscode.sh
@@ -44,3 +41,10 @@
 
 # Import Go Programming Language
 . desktop/go.sh
+
+# Import Terminus
+. desktop/terminus.sh
+
+# Import MOngoDB Compass
+. desktop/mongodb-compass.sh
+

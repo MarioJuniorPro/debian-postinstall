@@ -45,6 +45,9 @@
 # Import Terminus
 . desktop/terminus.sh
 
-# Import MOngoDB Compass
+# Import MongoDB Compass
 . desktop/mongodb-compass.sh
+
+# Import Insomnia
+. desktop/insomnia.sh
 

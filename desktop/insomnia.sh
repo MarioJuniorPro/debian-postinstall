@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker.sh(){
+insomnia.sh(){
 	REPO="deb https://dl.bintray.com/getinsomnia/Insomnia /"
 
 	sudo add-apt-repository --remove "$REPO";

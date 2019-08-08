@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ $UID != 0 ]]; then
-    echo "Please run this script with sudo:"
+if [[ $UID == 0 ]]; then
+    echo "Please run this script without sudo:"
     echo "sudo $0 $*"
     exit 1
 fi

@@ -40,6 +40,7 @@ ui-select-server.sh(){
             for val in $selected_apps; do
                 $val;
             done
+            sleep 3;
             msg-success.sh "Installation was successful";
             ui-main.sh;
         else

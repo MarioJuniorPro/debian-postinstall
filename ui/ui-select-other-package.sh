@@ -36,6 +36,7 @@ ui-select-other-package.sh(){
         confirm_window="25 60 15";
         if (whiptail --title "$confirm_title" --yesno "$confirm_msg" --fb 15 80); then
             package-install-other.sh $selected_apps;
+            sleep 3;
             msg-success.sh "Installation was successful";
             ui-main.sh;
         else

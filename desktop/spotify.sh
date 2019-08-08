@@ -3,9 +3,9 @@
 spotify.sh(){
 	REPO="deb http://repository.spotify.com stable non-free"
 
-	add-apt-repository --remove "$REPO";	
-	apt-add-repository -y "$REPO";
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59;
-	apt-get update -y;
-	apt-get install -y spotify-client --allow-unauthenticated
+	sudo add-apt-repository --remove "$REPO";	
+	sudo curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -;
+	sudo echo "$REPO" | sudo tee /etc/apt/sources.list.d/spotify.list;
+	sudo apt-get update -y;
+	sudo apt-get install -y spotify-client;
 }
